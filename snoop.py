@@ -1,13 +1,15 @@
 from scapy.all import *
 
-word = str('rtmp')
+word = 'rtmp'
 word.encode('hex')
 
 def data(packet):
 	try:
-		if word in packet.getlayer(Raw).load:
-			return str(packet[Raw].load.encode('hex')
+		# Regular expressions will be added to
+		# validate the packet's content
+		if word in packet[Raw].load:
+			return packet[Raw].load #.encode('hex')
 	except:
-		pass
+		pass # fix this :)
 
 sniff(prn=data, filter='dst port 1935', count=0, store=0)
